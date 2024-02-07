@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Login from "./login/page";
+import NavSidebar from "./components/NavSidebar";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {2 > 1 ? (
+          <div className="flex gap-4">
+            <NavSidebar>
+              <div className="flex flex-col gap-2">
+                {children}
+                <Footer />
+              </div>
+            </NavSidebar>
+          </div>
+        ) : (
+          <Login />
+        )}
+      </body>
     </html>
   );
 }
