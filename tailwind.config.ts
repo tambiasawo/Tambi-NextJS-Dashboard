@@ -13,6 +13,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        textPrimary: "var(--text) / <alpha-value>", //use alpha value when you use rgb values
+        textSecondary: "rgb(var(--textSoft) / <alpha-value>)", //use alpha value when you use)",
+        softBg: "var(--softBg)",
+        mainBg: "var(--mainBg)",
+        textColor: "var(--text)",
+        actionBg: "rgb(93, 87, 201)",
+      },
     },
   },
   plugins: [],
