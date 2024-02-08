@@ -13,18 +13,87 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MailIcon from "@mui/icons-material/Mail";
 import { usePathname } from "next/navigation";
-import { AccountCircle } from "@mui/icons-material";
+import {
+  AccountCircle,
+  CastSharp,
+  Dashboard,
+  Help,
+  Money,
+  Report,
+  People,
+  Settings,
+  ShoppingBag,
+  VerifiedUserSharp,
+} from "@mui/icons-material";
 import { Badge, Menu, MenuItem } from "@mui/material";
+import Link from "next/link";
 
+const menuItems = [
+  {
+    title: "Pages",
+    list: [
+      {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: <Dashboard />,
+      },
+      {
+        title: "Users",
+        path: "/users",
+        icon: <VerifiedUserSharp />,
+      },
+      {
+        title: "Products",
+        path: "/products",
+        icon: <ShoppingBag />,
+      },
+      {
+        title: "Transactions",
+        path: "/transactions",
+        icon: <CastSharp />,
+      },
+    ],
+  },
+  {
+    title: "Analytics",
+    list: [
+      {
+        title: "Revenue",
+        path: "/dashboard/revenue",
+        icon: <Money />,
+      },
+      {
+        title: "Reports",
+        path: "/dashboard/reports",
+        icon: <Report />,
+      },
+      {
+        title: "Teams",
+        path: "/dashboard/teams",
+        icon: <People />,
+      },
+    ],
+  },
+  {
+    title: "User",
+    list: [
+      {
+        title: "Settings",
+        path: "/dashboard/settings",
+        icon: <Settings />,
+      },
+      {
+        title: "Help",
+        path: "/dashboard/help",
+        icon: <Help />,
+      },
+    ],
+  },
+];
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -51,7 +120,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -226,7 +295,7 @@ export default function NavSidebar({
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className="bg-softBg">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -290,9 +359,12 @@ export default function NavSidebar({
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+      <Drawer variant="permanent" open={open} className="!bg-softBg ">
+        <DrawerHeader className="!bg-softBg">
+          <IconButton
+            onClick={handleDrawerClose}
+            className="text-textColor hover:bg-mainBg"
+          >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
@@ -300,60 +372,39 @@ export default function NavSidebar({
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+        {open ? <Divider /> : ""}
+        <List className="!bg-softBg">
+          {menuItems.map((menuItem, index) => {
+            return (
+              <ul className="pt-3">
+                {menuItem.list.map((item) => (
+                  <Link
+                    href={item.path}
+                    key={item.title}
+                    className="text-textColor"
+                  >
+                    <button
+                      key={item.path}
+                      className={`${
+                        open ? "w-[90%] mx-auto" : "w-full"
+                      } flex gap-7 mb-3 py-4 px-5 rounded-xl hover:bg-mainBg`}
+                    >
+                      {item.icon} {item.title}
+                    </button>
+                  </Link>
+                ))}
+              </ul>
+            );
+          })}
         </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+
+        <List className="!bg-softBg"></List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {children}
+        <Typography paragraph component="div">
+          {children}
+        </Typography>
       </Box>
     </Box>
   );
