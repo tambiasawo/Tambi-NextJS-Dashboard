@@ -29,7 +29,7 @@ import {
   ShoppingBag,
   VerifiedUserSharp,
 } from "@mui/icons-material";
-import { Badge, Menu, MenuItem } from "@mui/material";
+import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 
 const menuItems = [
@@ -38,7 +38,7 @@ const menuItems = [
     list: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: <Dashboard />,
       },
       {
@@ -360,10 +360,17 @@ export default function NavSidebar({
       {renderMobileMenu}
       {renderMenu}
       <Drawer variant="permanent" open={open} className="!bg-softBg ">
-        <DrawerHeader className="!bg-softBg">
+        <DrawerHeader className="!bg-softBg relative flex justify-between">
+          <div className="flex gap-6 sticky py-8 mt-1">
+            <Avatar src="" alt="" />
+            <section className="text-textColor">
+              <h3 className="font-bold"> Sarah Young</h3>
+              <span className="text-sm">Administrator</span>
+            </section>
+          </div>
           <IconButton
             onClick={handleDrawerClose}
-            className="text-textColor hover:bg-mainBg"
+            className="text-textColor hover:bg-mainBg "
           >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -376,7 +383,7 @@ export default function NavSidebar({
         <List className="!bg-softBg">
           {menuItems.map((menuItem, index) => {
             return (
-              <ul className="pt-3">
+              <ul className="pt-3" key={index}>
                 {menuItem.list.map((item) => (
                   <Link
                     href={item.path}
