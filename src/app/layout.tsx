@@ -19,16 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="bg-mainBg text-textColor">
         {2 > 1 ? (
-          <div className="flex gap-4">
-            <NavSidebar>
-              <div className="flex flex-col gap-2">
-                {children}
-                <Footer />
-              </div>
-            </NavSidebar>
-          </div>
+          <NavSidebar>
+            <div className="container mx-auto flex flex-col min-h-screen">
+              <div className="flex-grow">{children}</div>
+              <Footer />
+            </div>
+          </NavSidebar>
         ) : (
           <Login />
         )}
