@@ -1,0 +1,14 @@
+.form {
+  @apply w-full px-5 py-3 bg-softBg rounded-md flex flex-col gap-4 basis-3/4;
+}
+
+.form input:not([type="file"]),
+.form select,
+.form textarea {
+  @apply rounded outline-none bg-mainBg py-3 px-3 flex-1;
+}
+
+.form label {
+  margin-bottom: -13px;
+  font-size: 13px;
+}
