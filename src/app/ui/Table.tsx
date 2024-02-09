@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Rows } from "../components/Dashboard";
 import Link from "next/link";
+import { deleteProduct } from "../actions";
 
 type Data<T> = T;
 interface Props {
@@ -14,22 +15,22 @@ interface Props {
 
 const DataTable = ({ rows, columns, title }: Props) => {
   const findActionColumn = columns.find((column) => column.field === "action");
-
   if (findActionColumn)
-    findActionColumn.renderCell = (id: GridRenderCellParams) => (
-      <span className="flex justify-between gap-4">
-        <Link href={`/users/${2}`}>
-          <button className="bg-green-500 px-3 py-1 rounded-md">View</button>
-        </Link>
-        <form action={"deleteUser"}>
-          <input type="hidden" value={"id"} name="id" />
-          <button className="bg-red-500 px-3 py-1 rounded-md" type="submit">
-            Delete
-          </button>
-        </form>
-      </span>
-    );
-  console.log({ columns });
+    findActionColumn.renderCell = (params: GridRenderCellParams) => {
+      return (
+        <span className="flex justify-between gap-4">
+          <Link href={`/products/${params.id}`}>
+            <button className="bg-green-500 px-3 py-1 rounded-md">View</button>
+          </Link>
+          <form action={deleteProduct}>
+            <input type="hidden" value={params.id} name="id" />
+            <button className="bg-red-500 px-3 py-1 rounded-md" type="submit">
+              Delete
+            </button>
+          </form>
+        </span>
+      );
+    };
   return (
     <>
       <h1 className="p-2 text-lg semi-bold">{title}</h1>
