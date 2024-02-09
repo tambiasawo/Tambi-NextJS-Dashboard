@@ -1,0 +1,9 @@
+.form input:not([type="file"]),
+.form select,
+.form textarea {
+  @apply rounded outline-none bg-softBg py-5 px-3 flex-1 text-white border-2 border-[#5d57c9];
+}
+
+.form {
+  @apply w-full py-3 px-5 rounded-md mt-6 flex flex-col gap-4;
+}
