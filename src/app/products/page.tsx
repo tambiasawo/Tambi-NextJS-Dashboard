@@ -2,7 +2,6 @@ import React from "react";
 import { fetchProducts } from "../actions";
 import DataTable from "../ui/Table";
 import { GridColDef } from "@mui/x-data-grid";
-import Searchbar from "../ui/Searchbar";
 import Toolbar from "../ui/Toolbar";
 
 const columns: GridColDef[] = [
@@ -22,7 +21,6 @@ const columns: GridColDef[] = [
 const Products = async ({ searchParams }: { searchParams: { q: string } }) => {
   const searchTerm = searchParams.q;
   const products = await fetchProducts(searchTerm);
-
   return (
     <div className="px-4 py-2 bg-softBg rounded-md h-screen">
       <Toolbar />
