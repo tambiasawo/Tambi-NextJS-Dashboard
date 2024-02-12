@@ -6,8 +6,7 @@ import Paper from "@mui/material/Paper";
 export default function Chart({ title }: { title: string }) {
   return (
     <>
-      <h1 className="p-2 text-lg semi-bold">{title}</h1>
-
+      <h1 className="p-2 text-lg font-bold ">{title}</h1>
       <Paper className="bg-softBg rounded-md">
         <BarChart
           sx={{

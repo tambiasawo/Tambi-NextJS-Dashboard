@@ -1,0 +1,11 @@
+.input_group {
+  @apply w-full pl-2 py-3 rounded-xl focus:outline-none text-softBg;
+}
+
+.input_group:focus + * {
+  color: var(--softBg);
+}
+
+.input_group:not([type="email"]) ~ span:hover {
+  color: var(--softBg);
+}

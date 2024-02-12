@@ -1,7 +1,7 @@
 import React from "react";
 import Dashboard from "./components/Dashboard";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Dashboard />

@@ -14,87 +14,51 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MailIcon from "@mui/icons-material/Mail";
 import { usePathname } from "next/navigation";
 import {
   AccountCircle,
-  CastSharp,
   Dashboard,
-  Help,
-  Money,
-  Report,
-  People,
-  Settings,
+  Logout,
   ShoppingBag,
-  VerifiedUserSharp,
 } from "@mui/icons-material";
-import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
+import GroupIcon from "@mui/icons-material/Group";
+import PaidIcon from "@mui/icons-material/Paid";
+import {
+  Avatar,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import Link from "next/link";
+import { logout } from "../actions";
+import { useAuthContext } from "../utils/userContext";
 
 const menuItems = [
   {
-    title: "Pages",
-    list: [
-      {
-        title: "Dashboard",
-        path: "/",
-        icon: <Dashboard />,
-      },
-      {
-        title: "Users",
-        path: "/users",
-        icon: <VerifiedUserSharp />,
-      },
-      {
-        title: "Products",
-        path: "/products",
-        icon: <ShoppingBag />,
-      },
-      {
-        title: "Transactions",
-        path: "/transactions",
-        icon: <CastSharp />,
-      },
-    ],
+    title: "Dashboard",
+    path: "/",
+    icon: <Dashboard />,
   },
   {
-    title: "Analytics",
-    list: [
-      {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <Money />,
-      },
-      {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <Report />,
-      },
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <People />,
-      },
-    ],
+    title: "Users",
+    path: "/users",
+    icon: <GroupIcon />,
   },
   {
-    title: "User",
-    list: [
-      {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <Settings />,
-      },
-      {
-        title: "Help",
-        path: "/dashboard/help",
-        icon: <Help />,
-      },
-    ],
+    title: "Products",
+    path: "/products",
+    icon: <ShoppingBag />,
+  },
+  {
+    title: "Transactions",
+    path: "/transactions",
+    icon: <PaidIcon />,
   },
 ];
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -166,14 +130,44 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const getBreadCrumbs = (pathname: string) => {
+  const regex = /^[0-9a-zA-Z]{24}$/;
+
   const pathnameArray = pathname.split("/");
+  let pathId = "";
   let capitalizedPath = "";
+  let entity;
+
   const capitalizedArray = pathnameArray.map((path) => {
     if (path !== "") {
+      if (regex.test(path)) pathId = path;
       capitalizedPath = path[0].toLocaleUpperCase() + path.substring(1);
       return capitalizedPath;
     }
-  });
+  }); /* 
+
+  if (pathnameArray?.includes("products")) {
+    const entityPromise = getProduct(pathId)
+      .then((result) => {
+        console.log(result); // Access the resolved response here
+        return result;
+      })
+      .catch((error) => {
+        console.error("Error fetching product:", error);
+        throw error; // Propagate the error if needed
+      });
+
+    entityPromise.then((resolvedEntity) => {
+      console.log("Resolved entity:", resolvedEntity);
+    });
+
+    // You can also assign entityPromise to entity if needed
+    entity = entityPromise;
+  } else if (pathnameArray?.includes("/users")) {
+    //await getUser(pathId)
+  }
+ */
+  // console.log({ entity });
+
   return capitalizedArray.join(" > ").substring(3);
 };
 
@@ -185,6 +179,9 @@ export default function NavSidebar({
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const {
+    user: { user },
+  } = useAuthContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -215,7 +212,6 @@ export default function NavSidebar({
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -233,8 +229,7 @@ export default function NavSidebar({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => logout()}>Logout</MenuItem>
     </Menu>
   );
 
@@ -255,26 +250,6 @@ export default function NavSidebar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -308,29 +283,16 @@ export default function NavSidebar({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            className="text-textSecondary font-bold"
+          >
             {breadcrumbs}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -361,16 +323,18 @@ export default function NavSidebar({
       {renderMenu}
       <Drawer variant="permanent" open={open} className="!bg-softBg ">
         <DrawerHeader className="!bg-softBg relative flex justify-between">
-          <div className="flex gap-6 sticky py-8 mt-1">
-            <Avatar src="" alt="" />
+          <div className="flex gap-4 sticky mt-1 items-center">
+            <Avatar src={user.image ?? ""} alt="" />
             <section className="text-textColor">
-              <h3 className="font-bold"> Sarah Young</h3>
-              <span className="text-sm">Administrator</span>
+              <h3 className="font-bold"> {user.name}</h3>
+              <span className="text-sm">
+                {user?.isAdmin ? "Administrator" : "User"}
+              </span>
             </section>
           </div>
           <IconButton
             onClick={handleDrawerClose}
-            className="text-textColor hover:bg-mainBg "
+            className="text-textColor hover:bg-mainBg absolute right-0 p-2"
           >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -380,32 +344,65 @@ export default function NavSidebar({
           </IconButton>
         </DrawerHeader>
         {open ? <Divider /> : ""}
-        <List className="!bg-softBg">
-          {menuItems.map((menuItem, index) => {
-            return (
-              <ul className="pt-3" key={index}>
-                {menuItem.list.map((item) => (
-                  <Link
-                    href={item.path}
-                    key={item.title}
-                    className="text-textColor"
+        <List className="!bg-softBg text-textColor h-screen">
+          {menuItems.map((menuItem) => (
+            <Link href={menuItem.path} className="w-full" key={menuItem.title}>
+              <ListItem
+                key={menuItem.title}
+                disablePadding
+                sx={{ display: "block", pt: 1.5 }}
+              >
+                <ListItemButton
+                  className={`flex mb-1 py-3 rounded-xl hover:bg-mainBg`}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                      color: "white",
+                    }}
                   >
-                    <button
-                      key={item.path}
-                      className={`${
-                        open ? "w-[90%] mx-auto" : "w-full"
-                      } flex gap-7 mb-3 py-4 px-5 rounded-xl hover:bg-mainBg`}
-                    >
-                      {item.icon} {item.title}
-                    </button>
-                  </Link>
-                ))}
-              </ul>
-            );
-          })}
-        </List>
+                    {menuItem.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={menuItem.title}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
 
-        <List className="!bg-softBg"></List>
+          <ListItemButton
+            className={`flex mb-1 py-3 rounded-xl hover:bg-mainBg`}
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? "initial" : "center",
+              px: 2.5,
+            }}
+            onClick={() => logout()}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : "auto",
+                justifyContent: "center",
+                color: "white",
+              }}
+              className="hover:!cursor-pointer"
+            >
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary={"Logout"} sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </List>
+        <Divider />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

@@ -2,10 +2,13 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@/app/ui/Card";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
-import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import DataTable from "../ui/Table";
 import { Box } from "@mui/material";
 import Chart from "../ui/Chart";
+import { fetchProducts, fetchTransactions, fetchUsers } from "../actions";
+import { columns } from "../products/page";
+import { columns as userColumns } from "../users/page";
+import { columns as transColumns } from "../transactions/page";
 
 export interface Rows {
   id: number;
@@ -17,143 +20,12 @@ export interface Rows {
   gender: string;
   lastlogin: Date;
 }
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 80,
-    editable: false,
-  },
-  {
-    field: "username",
-    headerName: "User name",
-    width: 160,
-  },
-  {
-    field: "email",
-    headerName: "E-Mail",
-    description: "This is the user email.",
-    width: 160,
-  },
-  {
-    field: "gender",
-    headerName: "Gender",
-    width: 110,
-  },
-  {
-    field: "login",
-    headerName: "Last Login",
-    width: 110,
-  },
-];
 
-const rows: Rows[] = [
-  {
-    id: 1,
-    lastName: "Snow",
-    firstName: "Jon",
-    age: 14,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 2,
-    lastName: "Lannister",
-    firstName: "Cersei",
-    age: 31,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Female",
-    lastlogin: new Date(),
-  },
-  {
-    id: 3,
-    lastName: "Lannister",
-    firstName: "Jaime",
-    age: 31,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 4,
-    lastName: "Stark",
-    firstName: "Arya",
-    age: 11,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 5,
-    lastName: "Targaryen",
-    firstName: "Daenerys",
-    age: 33,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 6,
-    lastName: "Melisandre",
-    firstName: "Rachel",
-    age: 15,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 7,
-    lastName: "Clifford",
-    firstName: "Ferrara",
-    age: 44,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 8,
-    lastName: "Frances",
-    firstName: "Rossini",
-    age: 36,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-  {
-    id: 9,
-    lastName: "Roxie",
-    firstName: "Harvey",
-    age: 65,
-    username: "jonsnow",
-    email: "jonsnow@gmail.com",
-    gender: "Male",
-    lastlogin: new Date(),
-  },
-];
-const Dashboard = () => {
+const Dashboard = async () => {
+  const products = await fetchProducts("");
+  const users = await fetchUsers("");
+  const transactions = await fetchTransactions("");
+
   return (
     <Box className="flex flex-col">
       <Grid container columnSpacing={2} rowSpacing={4}>
@@ -161,7 +33,7 @@ const Dashboard = () => {
           <Card
             icon={<AnnouncementIcon />}
             heading="Total Users"
-            main={10.23}
+            main={products.length}
             footer="12% more than previous year"
           />
         </Grid>
@@ -169,27 +41,42 @@ const Dashboard = () => {
           <Card
             icon={<AnnouncementIcon />}
             heading="Total Users"
-            main={10.23}
+            main={users.length}
             footer="12% more than previous year"
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <Card
             icon={<AnnouncementIcon />}
-            heading="Total Users"
-            main={10.23}
+            heading="Total Transactions"
+            main={transactions.length}
             footer="-10% more than previous year"
           />
         </Grid>
 
         <Grid item xs={12} sm={12} md={8}>
-          <DataTable rows={rows} columns={columns} title={"Users"} />
+          <DataTable
+            rows={JSON.parse(JSON.stringify(users))}
+            columns={userColumns}
+            title={"Users"}
+          />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <Chart title="Groupings" />
         </Grid>
-        <Grid item xs={12}>
-          <DataTable rows={rows} columns={columns} title={"Products"} />
+        <Grid item xs={12} sm={12} md={6}>
+          <DataTable
+            rows={JSON.parse(JSON.stringify(products))}
+            columns={columns}
+            title={"Products"}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={6}>
+          <DataTable
+            rows={JSON.parse(JSON.stringify(transactions))}
+            columns={transColumns}
+            title={"Transactions"}
+          />
         </Grid>
       </Grid>
     </Box>

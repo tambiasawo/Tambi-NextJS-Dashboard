@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dialog, DialogTitle, DialogProps } from "@mui/material";
 import styles from "@/app/styles/FormDialog.module.css";
 import { addProduct } from "../actions";
+import { useAuthContext } from "../utils/userContext";
 
 const Toolbar = () => {
   const pathname = usePathname();
@@ -11,6 +12,10 @@ const Toolbar = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const [open, setOpen] = React.useState(false);
+
+  const {
+    user: { user },
+  } = useAuthContext();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,7 +33,6 @@ const Toolbar = () => {
       router.replace(`${pathname}`);
     }
   };
-
   return (
     <div className="flex justify-between mt-3 items-center">
       <div>
@@ -40,21 +44,22 @@ const Toolbar = () => {
           onChange={handleSearch}
         />
       </div>
-      <div>
-        <button
-          className="bg-[#5d57c9] px-3 py-2 rounded-lg"
-          onClick={handleClickOpen}
-        >
-          Add New
-        </button>
-      </div>
+      {user.isAdmin && (
+        <div>
+          <button
+            className="bg-[#5d57c9] px-3 py-2 rounded-lg"
+            onClick={handleClickOpen}
+          >
+            Add New
+          </button>
+        </div>
+      )}
       <Dialog
         open={open}
         onClose={handleClose}
         fullWidth={true}
         maxWidth={"md"}
         PaperProps={{
-          //component: "form",
           style: { backgroundColor: "var(--softBg)" },
         }}
       >

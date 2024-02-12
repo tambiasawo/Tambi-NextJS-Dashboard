@@ -1,14 +1,14 @@
-import { getProduct, updateProduct } from "@/app/actions";
+import { fetchProduct, updateProduct } from "@/app/actions";
 import React from "react";
 import styles from "@/app/styles/SingleProduct.module.css";
 
 const SingleProduct = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  const product = await getProduct(id);
+  const product = await fetchProduct(id);
 
   return (
-    <div className="flex gap-12 items-start">
+    <div className="flex gap-12 items-start flex-col lg:flex-row">
       <div className="rounded-md basis-[25%] h-max flex flex-col gap-5 py-3 px-0 bg-softBg items-center">
         <img src={product.img} alt={product.name} width="280px" />
         <h1 className="text-lg font-semibold">{product.title}</h1>
@@ -20,7 +20,7 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
           <label>Title</label>
           <input type="text" placeholder={product.title} name="title" />
           <label>Color</label>
-          <input type="text" placeholder={product.color} name="email" />
+          <input type="text" placeholder={product.color} name="color" />
           <label>Stock</label>
           <input type="number" placeholder={product.stock} name="stock" />
           <label>Description</label>

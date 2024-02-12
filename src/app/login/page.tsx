@@ -1,7 +1,12 @@
 import React from "react";
+import dynamic from "next/dynamic";
 
-const Login = () => {
-  return <div>login</div>;
+const Login = dynamic(() => import("@/app/components/LoginForm"), {
+  ssr: false,
+});
+
+const page = () => {
+  return <Login />;
 };
 
-export default Login;
+export default page;

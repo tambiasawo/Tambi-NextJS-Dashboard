@@ -14,9 +14,11 @@ const Card = ({ icon, heading, main, footer }: Props) => {
   let percentageValue = convertStringToFloat(footer);
 
   return (
-    <div className="rounded-xl bg-softBg py-3 px-3 flex justify-start gap-10 items-baseline h-[150px] ">
-      <Icon>{icon} </Icon>
-      <Stack className="flex flex-col" spacing={2}>
+    <div className="rounded-xl bg-softBg px-3 flex justify-start gap-10 items-baseline h-[150px] ">
+      <Icon fontSize="large" sx={{ height: "45px" }}>
+        {icon}
+      </Icon>
+      <Stack className="flex flex-col " spacing={2}>
         <h2 className="text-xl">{heading}</h2>
         <p className="text-2xl">{main}</p>
         <p className="text-sm">

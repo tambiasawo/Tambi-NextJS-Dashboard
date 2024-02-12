@@ -4,18 +4,13 @@ import DataTable from "../ui/Table";
 import { GridColDef } from "@mui/x-data-grid";
 import Toolbar from "../ui/Toolbar";
 
-const columns: GridColDef[] = [
-  { field: "title", headerName: "Title", width: 200 },
-  { field: "desc", headerName: "Description", width: 260 },
-  { field: "price", headerName: "Price", width: 90 },
-  { field: "stock", headerName: "Stock", width: 90 },
-  { field: "createdAt", headerName: "Date Created", width: 260 },
-  { field: "color", headerName: "Color", width: 120 },
-  {
-    field: "action",
-    headerName: "Action",
-    width: 200,
-  },
+export const columns: GridColDef[] = [
+  { field: "title", headerName: "Title", minWidth: 150 },
+  { field: "desc", headerName: "Description", minWidth: 200 },
+  { field: "price", headerName: "Price", minWidth: 120 },
+  { field: "stock", headerName: "Stock", minWidth: 120 },
+  { field: "createdAt", headerName: "Date Created", minWidth: 170 },
+  { field: "color", headerName: "Color", minWidth: 120 },
 ];
 
 const Products = async ({ searchParams }: { searchParams: { q: string } }) => {
