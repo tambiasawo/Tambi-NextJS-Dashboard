@@ -1,53 +1,8 @@
 import React from "react";
-import { fetchUsers } from "../actions";
+import { addUser, fetchUsers } from "../actions";
 import DataTable from "../ui/Table";
 import Toolbar from "../ui/Toolbar";
-import { GridColDef } from "@mui/x-data-grid";
-
-export const columns: GridColDef[] = [
-  {
-    field: "username",
-    headerName: "Username",
-    width: 150,
-    headerAlign: "left",
-    align: "left",
-  },
-  {
-    field: "email",
-    headerName: "Email Address",
-    width: 170,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    field: "createdAt",
-    headerName: "Date Created",
-    width: 170,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    field: "isAdmin",
-    headerName: "Role",
-    width: 170,
-    headerAlign: "left",
-    align: "left",
-  },
-  {
-    field: "isActive",
-    headerName: "Status",
-    width: 170,
-    headerAlign: "left",
-    align: "left",
-  },
-  {
-    field: "address",
-    headerName: "Address",
-    width: 170,
-    headerAlign: "left",
-    align: "left",
-  },
-];
+import { usersColumns } from "../components/Dashboard";
 
 const Users = async ({ searchParams }: { searchParams: { q: string } }) => {
   const searchTerm = searchParams.q;
@@ -55,8 +10,41 @@ const Users = async ({ searchParams }: { searchParams: { q: string } }) => {
 
   return (
     <div className="px-4 py-2 bg-softBg rounded-md h-screen">
-      <Toolbar />
-      <DataTable rows={JSON.parse(JSON.stringify(users))} columns={columns} />
+    <Toolbar
+        action={addUser}
+        title="User"
+        formFields={[
+          { type: "email", name: "email", placeholder: "Email Address" },
+          { type: "text", name: "username", placeholder: "Username" },
+          { type: "text", name: "password", placeholder: "Password" },
+          { type: "text", name: "phone", placeholder: "Phone" },
+          { type: "text", name: "address", placeholder: "Address" },
+          {
+            type: "select",
+            name: "isAdmin",
+            id: "isAdmin",
+            options: [
+              { value: "0", option: "Is Admin" },
+              { value: "true", option: "Yes" },
+              { value: "false", option: "No" },
+            ],
+          },
+          {
+            type: "select",
+            name: "isActive",
+            id: "isActive",
+            options: [
+              { value: "0", option: "Is Active" },
+              { value: "true", option: "Yes" },
+              { value: "false", option: "No" },
+            ],
+          },
+        ]}
+      />
+      <DataTable
+        rows={JSON.parse(JSON.stringify(users))}
+        columns={usersColumns}
+      />
     </div>
   );
 };

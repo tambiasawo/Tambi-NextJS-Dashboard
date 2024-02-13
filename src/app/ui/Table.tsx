@@ -18,12 +18,14 @@ const DataTable = ({ rows, columns, title }: Props) => {
   const {
     user: { user },
   } = useAuthContext();
-
+  // copy columns [] to anotehr
+  // cehck if action column already exists
+  // put it into a function and use usecallback
+  let updatedTableColumns = [...columns];
   if (user?.isAdmin) {
-    console.log("yes");
     let action = deleteProduct;
     let path = "products";
-    columns.push({
+    updatedTableColumns.push({
       field: "action",
       headerName: "Action",
       headerAlign: "center",
@@ -56,7 +58,7 @@ const DataTable = ({ rows, columns, title }: Props) => {
       },
     });
   }
-  columns.forEach((column) => {
+  updatedTableColumns.forEach((column) => {
     if (column.field === "createdAt") {
       column.renderCell = (params: GridRenderCellParams) => {
         const date = new Date(params.row.createdAt).toDateString();
@@ -97,7 +99,7 @@ const DataTable = ({ rows, columns, title }: Props) => {
             },
           }}
           rows={rows}
-          columns={columns}
+          columns={updatedTableColumns}
           initialState={{
             pagination: {
               paginationModel: {

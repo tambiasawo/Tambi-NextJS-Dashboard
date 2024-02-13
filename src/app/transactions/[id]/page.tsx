@@ -2,7 +2,7 @@ import { fetchTransaction, updateTransaction } from "@/app/actions";
 import React from "react";
 import styles from "@/app/styles/SingleUser.module.css";
 
-const SingleUser = async ({ params }: { params: { id: string } }) => {
+const SingleTransaction = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const trans = await fetchTransaction(id);
 
@@ -34,4 +34,4 @@ const SingleUser = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default SingleUser;
+export default SingleTransaction;

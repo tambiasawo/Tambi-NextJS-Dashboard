@@ -1,11 +1,27 @@
 "use client";
+import { Session } from "next-auth";
 import React from "react";
 
 type Props = {
-  user: null;
+  user: {
+    user: {
+      name: string;
+      isAdmin: boolean;
+      email: string;
+      image: string;
+    };
+  };
 };
-const AuthContext = React.createContext<Props>({
-  user: null,
+
+const AuthContext = React.createContext<Session>({
+  user: {
+    user: {
+      name: "",
+      isAdmin: false,
+      email: "",
+      image: "",
+    },
+  },
 });
 
 export const useAuthContext = () => React.useContext(AuthContext);
@@ -14,7 +30,7 @@ export const AuthContextProvider = ({
   user,
 }: {
   children: React.ReactNode;
-  user: any;
+  user: Session;
 }) => {
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>

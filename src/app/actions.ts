@@ -106,6 +106,30 @@ export const fetchUser = async (id: string) => {
   }
 };
 
+export const addUser = async (values: FormData) => {
+  connectDB().catch((e) => {
+    throw new Error("Could'nt connect to the database", e);
+  });
+  const { username, email, password, phone, address, isActive, isAdmin } =
+    Object.fromEntries(values);
+
+  try {
+    await User.create({
+      username,
+      email,
+      password,
+      isActive,
+      isAdmin,
+      phone,
+      address,
+    });
+  } catch (err) {
+    throw new Error("Could not create user" + err);
+  }
+
+  revalidatePath("/users");
+};
+
 export const fetchUsers = async (searchTerm: string) => {
   await connectDB().catch((e) => {
     throw new Error("Could'nt connect to the database", e);
@@ -181,13 +205,33 @@ export const fetchTransactions = async (searchTerm: string) => {
   try {
     const regex = new RegExp(searchTerm);
     const trans = await Transaction.find();
-    console.log(trans);
     return trans;
   } catch (e) {
     throw new Error("Could'nt fetch trans" + e);
   }
 };
 
+export const addTransaction = async (values: FormData) => {
+  connectDB().catch((e) => {
+    throw new Error("Could'nt connect to the database", e);
+  });
+  const { invoice, amount, createdAt, recipient, description } =
+    Object.fromEntries(values);
+
+  try {
+    await Transaction.create({
+      invoice,
+      amount,
+      description,
+      createdAt,
+      recipient,
+    });
+  } catch (err) {
+    throw new Error("Could not create Transaction" + err);
+  }
+
+  revalidatePath("/transactions");
+};
 export const deleteTransaction = async (value: FormData) => {
   const { id } = Object.fromEntries(value);
 

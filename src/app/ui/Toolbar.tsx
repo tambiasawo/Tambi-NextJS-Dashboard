@@ -1,12 +1,24 @@
 "use client";
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Dialog, DialogTitle, DialogProps } from "@mui/material";
+import { Dialog, DialogTitle } from "@mui/material";
 import styles from "@/app/styles/FormDialog.module.css";
-import { addProduct } from "../actions";
 import { useAuthContext } from "../utils/userContext";
 
-const Toolbar = () => {
+interface Field {
+  type: string;
+  name: string;
+  id?: string;
+  options?: { value: string; option: string }[];
+  placeholder?: string;
+}
+
+type Props = {
+  action: (formData: FormData) => void;
+  title: string;
+  formFields: Field[];
+};
+const Toolbar = ({ action, title, formFields }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -63,31 +75,40 @@ const Toolbar = () => {
           style: { backgroundColor: "var(--softBg)" },
         }}
       >
-        <DialogTitle className="text-white">Add New Product</DialogTitle>
+        <DialogTitle className="text-white">Add New {title}</DialogTitle>
         <div>
-          <form
-            className={styles.form}
-            action={addProduct}
-            onSubmit={handleClose}
-          >
-            <div className="flex justify-between gap-4">
-              <input type="text" placeholder="Title" name="title" />
-              <input type="number" placeholder="Price" name="price" />
-            </div>
-            <div className="flex justify-between gap-4">
-              <input type="text" placeholder="Color" name="color" />
-              <input type="number" placeholder="Stock " name="stock" />
+          <form className={styles.form} action={action} onSubmit={handleClose}>
+            <div className="grid grid-cols-2 gap-5 mb-3">
+              {formFields.map((field: Field) => {
+                if (field.type === "select") {
+                  return (
+                    <select name={field.name} id={field.id}>
+                      {field.options?.map((option) => (
+                        <option value={option.value}>{option.option} </option>
+                      ))}
+                    </select>
+                  );
+                }
+
+                if (field.type === "textarea") {
+                  return (
+                    <textarea
+                      rows={2}
+                      placeholder={field.placeholder}
+                      name={field.name}
+                    />
+                  );
+                }
+                return (
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                  />
+                );
+              })}
             </div>
 
-            <div className="flex items-baseline gap-4">
-              <input type="url" name="img" placeholder="Photo URL" />
-              <textarea
-                name="description"
-                rows={5}
-                className=""
-                placeholder="Description"
-              />
-            </div>
             <button className="bg-[#5d57c9] py-3 rounded" type="submit">
               Submit
             </button>

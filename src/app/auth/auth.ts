@@ -6,6 +6,9 @@ import bcrypt from "bcrypt";
 import { User } from "../db/schema";
 import connectDB from "../db/conn";
 
+interface JWTResult<T> {
+  _doc: T;
+}
 const login = async (username: string, password: string) => {
   try {
     connectDB();
@@ -54,7 +57,6 @@ export const { auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        // console.log("jwt in callbacks", user._doc, token);
         token.username = user._doc.username;
         token.img = user._doc.img;
         token.email = user._doc.email;
@@ -65,13 +67,11 @@ export const { auth, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (token) {
-        session.user.name = token.username;
-        session.user.image = token.img;
-        session.user.email = token.email;
+        session.user.name = token.username as string;
+        session.user.image = token.img as string;
+        session.user.email = token.email as string;
         session.user.isAdmin = token.isAdmin;
       }
-      //console.log({ token, session });
-
       return session;
     },
   },

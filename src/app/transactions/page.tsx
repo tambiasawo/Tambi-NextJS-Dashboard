@@ -1,46 +1,8 @@
 import React from "react";
-import { fetchTransactions } from "../actions";
+import { addTransaction, fetchTransactions } from "../actions";
 import DataTable from "../ui/Table";
 import Toolbar from "../ui/Toolbar";
-import { GridColDef } from "@mui/x-data-grid";
-
-export const columns: GridColDef[] = [
-  {
-    field: "invoice",
-    headerName: "Invoice Number",
-    width: 150,
-    headerAlign: "left",
-    align: "left",
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    width: 100,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    field: "createdAt",
-    headerName: "Date Created",
-    width: 170,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    field: "recipient",
-    headerName: "Recipient",
-    width: 170,
-    headerAlign: "left",
-    align: "left",
-  },
-  {
-    field: "description",
-    headerName: "Description",
-    width: 170,
-    headerAlign: "left",
-    align: "left",
-  },
-];
+import { transactionsColumns } from "../components/Dashboard";
 
 const Transactions = async ({
   searchParams,
@@ -52,10 +14,23 @@ const Transactions = async ({
 
   return (
     <div className="px-4 py-2 bg-softBg rounded-md h-screen">
-      <Toolbar />
+      <Toolbar
+        action={addTransaction}
+        title="Transaction"
+        formFields={[
+          { type: "number", name: "invoice", placeholder: "Invoice" },
+          { type: "number", name: "amount", placeholder: "Amount" },
+          { type: "text", name: "recipient", placeholder: "Recipient" },
+          {
+            type: "textarea",
+            name: "description",
+            placeholder: "Description",
+          },
+        ]}
+      />
       <DataTable
         rows={JSON.parse(JSON.stringify(transactions))}
-        columns={columns}
+        columns={transactionsColumns}
       />
     </div>
   );

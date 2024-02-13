@@ -1,11 +1,8 @@
-("use strict");
-
 import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import Login from "./components/LoginForm";
 import NavSidebar from "./components/NavSidebar";
-
 import Footer from "./components/Footer";
 import { auth } from "./auth/auth";
 import { AuthContextProvider } from "./utils/userContext";
@@ -21,6 +18,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await auth();
+
   return (
     <html lang="en">
       <body className="bg-mainBg text-textColor">
