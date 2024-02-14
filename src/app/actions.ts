@@ -7,6 +7,7 @@ import { signIn, signOut } from "./auth/auth";
 import { AuthError } from "next-auth";
 
 export type Product = typeof Product;
+
 export const fetchProducts = async (searchTerm: string) => {
   connectDB().catch((e) => {
     throw new Error("Could'nt connect to the database", e);
