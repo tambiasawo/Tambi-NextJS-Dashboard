@@ -287,7 +287,8 @@ export default function NavSidebar({
             variant="h6"
             noWrap
             component="div"
-            className="text-white font-bold"
+            className="!text-white !font-bold"
+            sx={{ color: "white !important" }}
           >
             {breadcrumbs}
           </Typography>
@@ -321,8 +322,11 @@ export default function NavSidebar({
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Drawer variant="permanent" open={open} className="!bg-softBg ">
-        <DrawerHeader className="!bg-softBg flex justify-between ">
+      <Drawer variant="permanent" open={open} className="!bg-softBg">
+        <DrawerHeader
+          className="!bg-softBg flex !justify-between"
+          sx={{ justifyContent: "space-between !important" }}
+        >
           <div className="flex gap-4 sticky mt-1 items-center">
             <Avatar src={user.image ?? ""} alt="" />
             <section className="text-textColor">
@@ -334,12 +338,13 @@ export default function NavSidebar({
           </div>
           <IconButton
             onClick={handleDrawerClose}
-            className="text-white hover:bg-mainBg absolute right-0 p-2"
+            className="!text-white hover:bg-mainBg absolute right-0 p-2"
+            sx={{ color: "white !important" }}
           >
             {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
+              <ChevronRightIcon sx={{ color: "white !important" }} />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon sx={{ color: "white !important" }} />
             )}
           </IconButton>
         </DrawerHeader>
