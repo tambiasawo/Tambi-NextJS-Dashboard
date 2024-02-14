@@ -19,11 +19,21 @@ const SingleUser = async ({ params }: { params: { id: string } }) => {
         <form className={styles.form} action={updateUser}>
           <label className="text-[22px]">Username</label>
           <input type="text" name="id" hidden value={user.id} readOnly />
-          <input type="text" name="username" placeholder={user.username} />
+          <input
+            type="text"
+            name="username"
+            placeholder={user.username}
+            required
+          />
           <label>Email</label>
-          <input type="email" name="email" placeholder={user.email} />
+          <input type="email" name="email" placeholder={user.email} required />
           <label>Password</label>
-          <input type="password" name="password" placeholder={user.password} />
+          <input
+            type="password"
+            name="password"
+            placeholder={user.password}
+            required
+          />
           <label>Phone</label>
           <input type="phone" name="Phone" placeholder={user.phone} />
           <label>Is Active ?</label>
@@ -42,6 +52,7 @@ const SingleUser = async ({ params }: { params: { id: string } }) => {
             name="isAdmin"
             id="isAdmin"
             value={user.isAdmin ? "true" : "false"}
+            required
           >
             <option value="0">Is Admin ?</option>
             <option value="false">No</option>

@@ -115,9 +115,9 @@ const Dashboard = async () => {
   const transactions = await fetchTransactions("");
 
   return (
-    <Box className="flex flex-col">
-      <Grid container columnSpacing={2} rowSpacing={4}>
-        <Grid item xs={12} sm={6} md={4}>
+    <Box className="flex flex-col w-[35%] sm:w-[80%] md:w-full !overflow-x-hidden">
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
             icon={<AnnouncementIcon />}
             heading="Total Users"
@@ -125,7 +125,7 @@ const Dashboard = async () => {
             footer="12% more than previous year"
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
             icon={<AnnouncementIcon />}
             heading="Total Users"
@@ -133,7 +133,7 @@ const Dashboard = async () => {
             footer="12% more than previous year"
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+        <Grid item xs={12} sm={12} md={12} lg={4}>
           <Card
             icon={<AnnouncementIcon />}
             heading="Total Transactions"
@@ -142,6 +142,7 @@ const Dashboard = async () => {
           />
         </Grid>
 
+        {/* Users DataTable */}
         <Grid item xs={12} sm={12} md={8}>
           <DataTable
             rows={JSON.parse(JSON.stringify(users))}
@@ -149,17 +150,23 @@ const Dashboard = async () => {
             title={"Users"}
           />
         </Grid>
+
+        {/* Chart */}
         <Grid item xs={12} sm={12} md={4}>
           <Chart title="Groupings" />
         </Grid>
-        <Grid item xs={12}>
+
+        {/* Products DataTable */}
+        <Grid item xs={12} md={6}>
           <DataTable
             rows={JSON.parse(JSON.stringify(products))}
             columns={productsColumns}
             title={"Products"}
           />
         </Grid>
-        <Grid item xs={12}>
+
+        {/* Transactions DataTable */}
+        <Grid item xs={12} md={6}>
           <DataTable
             rows={JSON.parse(JSON.stringify(transactions))}
             columns={transactionsColumns}

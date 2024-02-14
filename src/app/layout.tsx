@@ -25,8 +25,8 @@ export default async function RootLayout({
         {user ? (
           <AuthContextProvider user={user}>
             <NavSidebar>
-              <div className="container mx-auto flex flex-col min-h-screen">
-                <div className="flex-grow">{children}</div>
+              <div className="container flex flex-col min-h-screen !overflow-x-hidden">
+                <div>{children}</div>
                 <Footer />
               </div>
             </NavSidebar>
