@@ -18,9 +18,7 @@ const DataTable = ({ rows, columns, title }: Props) => {
   const {
     user: { user },
   } = useAuthContext();
-  // copy columns [] to anotehr
-  // cehck if action column already exists
-  // put it into a function and use usecallback
+
   let updatedTableColumns = [...columns];
   if (user?.isAdmin) {
     let action = deleteProduct;
