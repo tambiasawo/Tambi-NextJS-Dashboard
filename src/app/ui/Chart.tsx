@@ -7,10 +7,20 @@ export default function Chart({ title }: { title: string }) {
   return (
     <>
       <h1 className="p-2 text-lg font-bold ">{title}</h1>
-      <Paper className="bg-softBg rounded-md">
+      <Paper
+        className="!bg-softBg rounded-md"
+        sx={{
+          "&.MuiPaper-root": {
+            backgroundColor: "#182237 !important",
+            height: "500px",
+          },
+        }}
+      >
         <BarChart
           sx={{
-            ".MuiChartsAxis-root .MuiChartsAxis-tickLabel": { fill: "white" },
+            ".MuiChartsAxis-root .MuiChartsAxis-tickLabel": {
+              fill: "white",
+            },
           }}
           xAxis={[
             { scaleType: "band", data: ["group A", "group B", "group C"] },

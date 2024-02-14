@@ -287,7 +287,7 @@ export default function NavSidebar({
             variant="h6"
             noWrap
             component="div"
-            className="text-textSecondary font-bold"
+            className="text-white font-bold"
           >
             {breadcrumbs}
           </Typography>
@@ -322,7 +322,7 @@ export default function NavSidebar({
       {renderMobileMenu}
       {renderMenu}
       <Drawer variant="permanent" open={open} className="!bg-softBg ">
-        <DrawerHeader className="!bg-softBg relative flex justify-between">
+        <DrawerHeader className="!bg-softBg flex justify-between ">
           <div className="flex gap-4 sticky mt-1 items-center">
             <Avatar src={user.image ?? ""} alt="" />
             <section className="text-textColor">
@@ -334,7 +334,7 @@ export default function NavSidebar({
           </div>
           <IconButton
             onClick={handleDrawerClose}
-            className="text-textColor hover:bg-mainBg absolute right-0 p-2"
+            className="text-white hover:bg-mainBg absolute right-0 p-2"
           >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
