@@ -12,7 +12,7 @@ const Login = () => {
   const [state, formAction] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
   return (
-    <section className=" w-1/3  mx-auto py-8 flex flex-col justify-center bg-white mt-60 px-3 rounded-md">
+    <section className=" md:w-1/3  mx-auto py-8 flex flex-col justify-center bg-white mt-60 px-3 rounded-md w-[90%]">
       <h1 className="text-center text-black font-semibold text-4xl">Login</h1>
       <form
         className="flex flex-col gap-7 p-5 justify-center items-center"
