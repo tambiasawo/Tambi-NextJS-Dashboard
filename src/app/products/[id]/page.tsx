@@ -1,6 +1,7 @@
 import { fetchProduct, updateProduct } from "@/app/actions";
 import React from "react";
 import styles from "@/app/styles/SingleProduct.module.css";
+import Image from "next/image";
 
 const SingleProduct = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -8,9 +9,9 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
   const product = await fetchProduct(id);
 
   return (
-    <div className="flex gap-12 items-start flex-col lg:flex-row">
+    <div className="flex gap-12 lg:items-start flex-col  lg:flex-row">
       <div className="rounded-md basis-[25%] h-max flex flex-col gap-5 py-3 px-0 bg-softBg items-center">
-        <img src={product.img} alt={product.name} width="280px" />
+        <Image src={product.img} alt={product.name} width={280} height={300} />
         <h1 className="text-lg font-semibold">{product.title}</h1>
       </div>
 

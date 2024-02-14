@@ -82,7 +82,7 @@ const Toolbar = ({ action, title, formFields }: Props) => {
               {formFields.map((field: Field) => {
                 if (field.type === "select") {
                   return (
-                    <select name={field.name} id={field.id}>
+                    <select key={field.name} name={field.name} id={field.id}>
                       {field.options?.map((option) => (
                         <option value={option.value}>{option.option} </option>
                       ))}
@@ -93,6 +93,7 @@ const Toolbar = ({ action, title, formFields }: Props) => {
                 if (field.type === "textarea") {
                   return (
                     <textarea
+                      key={field.name}
                       rows={2}
                       placeholder={field.placeholder}
                       name={field.name}
@@ -101,6 +102,7 @@ const Toolbar = ({ action, title, formFields }: Props) => {
                 }
                 return (
                   <input
+                    key={field.name}
                     type={field.type}
                     name={field.name}
                     placeholder={field.placeholder}

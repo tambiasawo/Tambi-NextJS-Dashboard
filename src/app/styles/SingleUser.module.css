@@ -43,11 +43,12 @@
   border-radius: 5px;
   background-color: var(--mainBg);
   color: var(--text);
-  margin: 10px 0px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .form label {
-  font-size: 12px;
+  @apply text-sm 2xl:text-[18px];
 }
 
 .form button {

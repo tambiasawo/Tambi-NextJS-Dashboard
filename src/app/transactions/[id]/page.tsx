@@ -13,10 +13,8 @@ const SingleTransaction = async ({ params }: { params: { id: string } }) => {
           <label className="text-[22px]">Recipient</label>
           <input type="text" name="id" hidden value={trans.id} readOnly />
           <input type="text" name="recipient" placeholder={trans.recipient} />
-          <label>Invoice</label>
+          <label>Invoice Number</label>
           <input type="number" name="invoice" placeholder={trans.invoice} />
-          <label>Date</label>
-          <input type="date" name="createdAt" placeholder={trans.createdAt} />
           <label>Amount</label>
           <input type="number" name="amount" placeholder={trans.amount} />
 

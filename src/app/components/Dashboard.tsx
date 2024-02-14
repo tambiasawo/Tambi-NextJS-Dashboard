@@ -20,7 +20,7 @@ export interface Rows {
 }
 export const productsColumns: GridColDef[] = [
   { field: "title", headerName: "Title", minWidth: 150 },
-  { field: "desc", headerName: "Description", minWidth: 200 },
+  { field: "description", headerName: "Description", minWidth: 200 },
   { field: "price", headerName: "Price", minWidth: 120 },
   { field: "stock", headerName: "Stock", minWidth: 120 },
   { field: "createdAt", headerName: "Date Created", minWidth: 170 },

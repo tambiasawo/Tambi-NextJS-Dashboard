@@ -5,10 +5,10 @@
 .form input:not([type="file"]),
 .form select,
 .form textarea {
-  @apply rounded outline-none bg-mainBg py-3 px-3 flex-1;
+  @apply rounded outline-none bg-mainBg py-3 px-3 flex-1 mb-1.5 2xl:mt-2.5 2xl:mb-[20px];
 }
 
 .form label {
   margin-bottom: -13px;
-  font-size: 13px;
+  @apply text-sm 2xl:!text-[18px];
 }
