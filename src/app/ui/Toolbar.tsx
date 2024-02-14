@@ -84,7 +84,9 @@ const Toolbar = ({ action, title, formFields }: Props) => {
                   return (
                     <select key={field.name} name={field.name} id={field.id}>
                       {field.options?.map((option) => (
-                        <option value={option.value}>{option.option} </option>
+                        <option key={option.option} value={option.value}>
+                          {option.option}{" "}
+                        </option>
                       ))}
                     </select>
                   );
