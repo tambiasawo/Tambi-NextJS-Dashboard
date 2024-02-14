@@ -71,7 +71,6 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.email = token.email as string;
         session.user.isAdmin = token?.isAdmin as boolean | undefined;
       }
-      console.log({ session });
       return session;
     },
   },
