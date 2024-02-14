@@ -138,7 +138,7 @@ const Dashboard = async () => {
             icon={<AnnouncementIcon />}
             heading="Total Transactions"
             main={transactions.length}
-            footer="-10% more than previous year"
+            footer="10% less than previous year"
           />
         </Grid>
 

@@ -21,13 +21,12 @@ const Card = ({ icon, heading, main, footer }: Props) => {
       <Stack className="flex flex-col flex-shrink" spacing={2}>
         <h2 className="text-xl">{heading}</h2>
         <p className="text-2xl">{main}</p>
-        <p className="text-sm">
-          <span
-            className={percentageValue < 0 ? "text-red-500" : "text-green-500"}
-          >
-            {percentageValue + "% "}
-          </span>
-          {footer.substring(footer.indexOf("more"))}
+        <p
+          className={
+            footer.indexOf("less") !== -1 ? "text-red-500" : "text-green-500"
+          }
+        >
+          {footer}
         </p>
       </Stack>
     </div>
