@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Dialog, DialogTitle } from "@mui/material";
+import { Dialog, DialogTitle, IconButton } from "@mui/material";
 import styles from "@/app/styles/FormDialog.module.css";
 import { useAuthContext } from "../utils/userContext";
+import { AddCircleOutline } from "@mui/icons-material";
 
 interface Field {
   type: string;
@@ -46,24 +47,30 @@ const Toolbar = ({ action, title, formFields }: Props) => {
     }
   };
   return (
-    <div className="flex justify-between mt-3 items-center">
+    <div className="flex flex-col-reverse gap-2 md:flex-row md:justify-between md:mt-3 mt-0 md:items-center">
       <div>
         <input
           type="text"
           placeholder="Search"
           name="search"
-          className="px-3 py-2 rounded-md bg-mainBg outline:none focus:outline-none"
+          className="px-3 py-2 rounded-md bg-mainBg outline:none focus:outline-none w-full"
           onChange={handleSearch}
         />
       </div>
       {user.isAdmin && (
         <div>
           <button
-            className="bg-[#5d57c9] px-3 py-2 rounded-lg"
+            className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
             onClick={handleClickOpen}
           >
             Add New
           </button>
+          <IconButton
+            className="block float-right md:hidden p-0"
+            onClick={handleClickOpen}
+          >
+            <AddCircleOutline fontSize="large" sx={{ color: "#5d57c9" }} />
+          </IconButton>
         </div>
       )}
       <Dialog

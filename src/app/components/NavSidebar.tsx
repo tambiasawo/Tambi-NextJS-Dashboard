@@ -408,7 +408,11 @@ export default function NavSidebar({
         </List>
         <Divider />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3 }}
+        className="w-[45%] sm:w-[80%] md:w-full"
+      >
         <DrawerHeader />
         <Typography paragraph component="div">
           {children}

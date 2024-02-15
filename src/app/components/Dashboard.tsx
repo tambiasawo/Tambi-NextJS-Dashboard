@@ -115,7 +115,7 @@ const Dashboard = async () => {
   const transactions = await fetchTransactions("");
 
   return (
-    <Box className="flex flex-col w-[35%] sm:w-[80%] md:w-full !overflow-x-hidden">
+    <Box className="flex flex-col  !overflow-x-hidden">
       <Grid container spacing={4}>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
