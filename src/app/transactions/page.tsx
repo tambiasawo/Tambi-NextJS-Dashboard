@@ -18,7 +18,7 @@ const Transactions = async ({
         action={addTransaction}
         title="Transaction"
         formFields={[
-          { type: "number", name: "invoice", placeholder: "Invoice" },
+          { type: "text", name: "invoice", placeholder: "Invoice" },
           { type: "number", name: "amount", placeholder: "Amount" },
           { type: "text", name: "recipient", placeholder: "Recipient" },
           {

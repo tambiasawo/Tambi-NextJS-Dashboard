@@ -205,7 +205,7 @@ export const fetchTransactions = async (searchTerm: string) => {
   });
   try {
     const regex = new RegExp(searchTerm);
-    const trans = await Transaction.find();
+    const trans = await Transaction.find({ invoice: { $regex: regex } });
     return trans;
   } catch (e) {
     throw new Error("Could'nt fetch trans" + e);

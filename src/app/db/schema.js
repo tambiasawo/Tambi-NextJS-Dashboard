@@ -79,7 +79,7 @@ const TransactionSchema = new Schema(
   {
     invoice: {
       required: true,
-      type: Number,
+      type: String,
       unique: true,
     },
     description: {

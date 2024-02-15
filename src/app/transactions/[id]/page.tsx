@@ -20,7 +20,7 @@ const SingleTransaction = async ({ params }: { params: { id: string } }) => {
           />
           <label>Invoice Number</label>
           <input
-            type="number"
+            type="text"
             name="invoice"
             placeholder={trans.invoice}
             required
