@@ -9,8 +9,10 @@ import { Error } from "@mui/icons-material";
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
+  const [isUserRole, setUserRole] = React.useState(false);
   const [state, formAction] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
+
   return (
     <>
       <h1 className="text-center text-white font-semibold text-4xl mt-40 pb-10">
@@ -29,7 +31,9 @@ const Login = () => {
               placeholder="Username"
               name="username"
               className={styles.input_group}
+              value={isUserRole ? "user1" : "admin1"}
               required
+              readOnly
             />
 
             <span className="text-slate-300">
@@ -41,7 +45,9 @@ const Login = () => {
               type={show ? "text" : "password"}
               placeholder="Password"
               name="password"
+              value={isUserRole ? "12223434" : "1233434"}
               className={styles.input_group}
+              readOnly
             />
             <span
               className="text-slate-300 pr-3 focus:color-bg-formBg cursor-pointer"
@@ -51,6 +57,24 @@ const Login = () => {
             </span>
           </div>
 
+          <div
+            className="flex items-center gap-8 text-black w-full"
+            style={{ justifyContent: "start !important" }}
+          >
+            <span className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                name="user"
+                id="user"
+                value="user"
+                onChange={() => {
+                  setUserRole((prev) => !prev);
+                }}
+                className="text-black"
+              />
+              <label htmlFor="user">User</label>
+            </span>
+          </div>
           <div
             className="flex h-4 items-end space-x-1"
             aria-live="polite"
