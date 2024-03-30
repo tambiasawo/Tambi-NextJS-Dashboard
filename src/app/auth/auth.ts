@@ -44,7 +44,6 @@ export const { auth, signIn, signOut } = NextAuth({
             .safeParse(credentials);
           if (parsedCredentials.success) {
             const { username, password } = parsedCredentials.data;
-
             const user = await login(username, password);
             return user;
           }
