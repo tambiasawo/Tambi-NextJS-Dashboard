@@ -6,10 +6,11 @@ import styles from "@/app/styles/Login.module.css";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "../actions";
 import { Error } from "@mui/icons-material";
+import Tooltip from "@mui/material/Tooltip";
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
-  const [isUserRole, setUserRole] = React.useState(false);
+  const [role, setRole] = React.useState(false);
   const [state, formAction] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
 
@@ -31,7 +32,7 @@ const Login = () => {
               placeholder="Username"
               name="username"
               className={styles.input_group}
-              value={isUserRole ? "user1" : "admin1"}
+              value={role ? "admin1" : "user1"}
               required
               readOnly
             />
@@ -45,7 +46,7 @@ const Login = () => {
               type={show ? "text" : "password"}
               placeholder="Password"
               name="password"
-              value={isUserRole ? "12223434" : "1233434"}
+              value={role ? "1233434" : "12223434"}
               className={styles.input_group}
               readOnly
             />
@@ -64,15 +65,19 @@ const Login = () => {
             <span className="flex gap-2 items-center">
               <input
                 type="checkbox"
-                name="user"
-                id="user"
-                value="user"
+                name="admin"
+                id="admin"
+                value="admin"
                 onChange={() => {
-                  setUserRole((prev) => !prev);
+                  setRole((prev) => !prev);
                 }}
                 className="text-black"
               />
-              <label htmlFor="user">User</label>
+              <label htmlFor="admin">
+                <Tooltip title="Click here to sign in as an admin" placement="bottom-start">
+                  <span> Admin ?</span>
+                </Tooltip>
+              </label>
             </span>
           </div>
           <div
