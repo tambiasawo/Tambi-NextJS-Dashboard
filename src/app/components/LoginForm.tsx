@@ -7,6 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "../actions";
 import { Error } from "@mui/icons-material";
 import Tooltip from "@mui/material/Tooltip";
+import Zoom from "@mui/material/Zoom";
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
@@ -15,7 +16,7 @@ const Login = () => {
   const { pending } = useFormStatus();
 
   return (
-    <>
+    <div>
       <h1 className="text-center text-white font-semibold text-4xl mt-20 lg:mt-40 pb-10">
         NextGen Dashboard
       </h1>
@@ -73,7 +74,14 @@ const Login = () => {
               />
               <label htmlFor="admin">
                 <Tooltip
-                  title="Click here to sign in as an admin"
+                  TransitionComponent={Zoom}
+                  TransitionProps={{ timeout: 400 }}
+                  title={
+                    <div>
+                      Click here to sign in as an admin.{" "}
+                      <p>Admins can add new entities. Eg: users </p>
+                    </div>
+                  }
                   placement="bottom-start"
                 >
                   <span> Admin ?</span>
@@ -102,7 +110,7 @@ const Login = () => {
           </button>
         </form>
       </section>
-    </>
+    </div>
   );
 };
 
