@@ -18,7 +18,7 @@ const Card = ({ icon, heading, main, footer }: Props) => {
       <Icon fontSize="large" sx={{ height: "45px" }}>
         {icon}
       </Icon>
-      <Stack className="flex flex-col flex-shrink" spacing={2}>
+      <Stack className="flex flex-col flex-shrink" spacing={1}>
         <h2 className="text-xl">{heading}</h2>
         <p className="text-2xl">{main}</p>
         <p
