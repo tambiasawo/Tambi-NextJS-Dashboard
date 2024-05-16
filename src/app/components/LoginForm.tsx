@@ -34,7 +34,6 @@ const Login = () => {
               className={styles.input_group}
               value={role ? "admin1" : "user1"}
               required
-              readOnly
             />
 
             <span className="text-slate-300">
@@ -48,7 +47,6 @@ const Login = () => {
               name="password"
               value={role ? "1233434" : "12223434"}
               className={styles.input_group}
-              readOnly
             />
             <span
               className="text-slate-300 pr-3 focus:color-bg-formBg cursor-pointer"
@@ -74,7 +72,10 @@ const Login = () => {
                 className="text-black"
               />
               <label htmlFor="admin">
-                <Tooltip title="Click here to sign in as an admin" placement="bottom-start">
+                <Tooltip
+                  title="Click here to sign in as an admin"
+                  placement="bottom-start"
+                >
                   <span> Admin ?</span>
                 </Tooltip>
               </label>
