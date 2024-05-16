@@ -16,12 +16,12 @@ const Login = () => {
 
   return (
     <>
-      <h1 className="text-center text-white font-semibold text-4xl mt-40 pb-10">
-        Next Gen Dashboard
+      <h1 className="text-center text-white font-semibold text-4xl mt-20 lg:mt-40 pb-10">
+        NextGen Dashboard
       </h1>
 
       <section className=" md:w-1/3  mx-auto py-8 flex flex-col justify-center bg-white  px-3 rounded-md w-[90%]">
-        <h2 className="text-center text-black font-semibold text-4xl">Login</h2>
+        <h2 className="text-center text-black font-semibold text-2xl">Login</h2>
         <form
           className="flex flex-col gap-7 p-5 justify-center items-center"
           action={formAction}
