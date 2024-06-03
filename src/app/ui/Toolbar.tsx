@@ -58,17 +58,14 @@ const Toolbar = ({ action, title, formFields }: Props) => {
         />
       </div>
       {user.isAdmin && (
-        <div>
+        <div className="flex gap-4">
           <button
             className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
             onClick={handleClickOpen}
           >
             Add New
           </button>
-          <IconButton
-            className="float-right md:hidden p-1"
-            onClick={handleClickOpen}
-          >
+          <IconButton className="md:hidden p-1" onClick={handleClickOpen}>
             <AddCircleOutline
               fontSize="large"
               sx={{ color: "#fff" }}
