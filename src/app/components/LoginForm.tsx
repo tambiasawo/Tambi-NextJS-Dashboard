@@ -11,7 +11,7 @@ import Zoom from "@mui/material/Zoom";
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
-  const [role, setRole] = React.useState(false);
+  const [role, setRole] = React.useState(true);
   const [state, formAction] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
 
@@ -67,6 +67,7 @@ const Login = () => {
                 name="admin"
                 id="admin"
                 value="admin"
+                checked={role}
                 onChange={() => {
                   setRole((prev) => !prev);
                 }}
