@@ -70,7 +70,11 @@ const Toolbar = ({ action, title, formFields }: Props) => {
             onClick={handleClickOpen}
             sx={{ backgroundColor: "#5d57c9" }}
           >
-            <AddCircleOutline fontSize="large" sx={{ color: "#fff" }} />
+            <AddCircleOutline
+              fontSize="large"
+              sx={{ color: "#fff" }}
+              className="md:hidden"
+            />
           </IconButton>
         </div>
       )}
