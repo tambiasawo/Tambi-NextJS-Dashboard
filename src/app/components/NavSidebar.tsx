@@ -58,7 +58,7 @@ const menuItems = [
     icon: <PaidIcon />,
   },
 ];
-const drawerWidth = 250;
+const drawerWidth = 210;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
