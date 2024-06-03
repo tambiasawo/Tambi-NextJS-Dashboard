@@ -120,9 +120,9 @@ const Dashboard = async () => {
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
             icon={<AnnouncementIcon />}
-            heading="Total Users"
+            heading="Total Products"
             main={products.length}
-            footer="12% more than previous year"
+            footer="+12% more than previous year"
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
@@ -130,7 +130,7 @@ const Dashboard = async () => {
             icon={<AnnouncementIcon />}
             heading="Total Users"
             main={users.length}
-            footer="12% more than previous year"
+            footer="+12% more than previous year"
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4}>
@@ -138,7 +138,7 @@ const Dashboard = async () => {
             icon={<AnnouncementIcon />}
             heading="Total Transactions"
             main={transactions.length}
-            footer="10% less than previous year"
+            footer="-10% less than previous year"
           />
         </Grid>
 
