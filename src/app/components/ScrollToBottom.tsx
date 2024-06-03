@@ -37,7 +37,7 @@ const ScrollToBottom = () => {
       onClick={handleScroll}
       className={` ${
         !isVisible ? "hidden" : "visible"
-      } fixed bottom-5 right-5 cursor-pointer p-3 bg-mainBg text-white border border-white rounded-full `}
+      } fixed bottom-5 right-5 cursor-pointer p-3 bg-mainBg text-white border border-slate-700 rounded-full `}
     >
       <ArrowDownwardIcon />
     </div>
