@@ -47,37 +47,37 @@ const Toolbar = ({ action, title, formFields }: Props) => {
     }
   };
   return (
-    <div className="flex flex-col-reverse gap-2 md:flex-row md:justify-between md:mt-3 mt-0 md:items-center">
-      <div>
+    <div className="flex flex-col-reverse gap-2 md:mt-3 mt-0 md:items-between">
+      <div className="flex justify-between gap-2 items-center">
         <input
           type="text"
           placeholder="Search"
           name="search"
-          className="px-3 py-2 rounded-md bg-mainBg outline:none focus:outline-none w-full"
+          className="px-3 py-2 rounded-md bg-mainBg outline:none focus:outline-none w-full md:w-[50%]"
           onChange={handleSearch}
         />
+        {user.isAdmin && (
+          <div>
+            <div className="">
+              <button
+                className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
+                onClick={handleClickOpen}
+              >
+                Add New
+              </button>
+            </div>
+            <div className="md:hidden">
+              <IconButton className="p-1" onClick={handleClickOpen}>
+                <AddCircleOutline
+                  fontSize="large"
+                  sx={{ color: "#fff" }}
+                  className="hover:scale-125"
+                />
+              </IconButton>
+            </div>
+          </div>
+        )}
       </div>
-      {user.isAdmin && (
-        <>
-          <div className="">
-            <button
-              className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
-              onClick={handleClickOpen}
-            >
-              Add New
-            </button>
-          </div>
-          <div className="md:hidden">
-            <IconButton className="p-1" onClick={handleClickOpen}>
-              <AddCircleOutline
-                fontSize="large"
-                sx={{ color: "#fff" }}
-                className="hover:scale-125"
-              />
-            </IconButton>
-          </div>
-        </>
-      )}
       <Dialog
         open={open}
         onClose={handleClose}
