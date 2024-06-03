@@ -6,6 +6,7 @@ import NavSidebar from "./components/NavSidebar";
 import Footer from "./components/Footer";
 import { auth } from "./auth/auth";
 import { AuthContextProvider } from "./utils/userContext";
+import ScrollToBottom from "./components/ScrollToBottom";
 
 export const metadata: Metadata = {
   title: "Next Generation Dashboard",
@@ -25,8 +26,11 @@ export default async function RootLayout({
         {user ? (
           <AuthContextProvider user={user}>
             <NavSidebar>
-              <div className="container w-full xl:max-w-9xl xl:mx-auto flex flex-col min-h-screen !overflow-x-hidden">
-                <div>{children}</div>
+              <div className="relative container w-full xl:max-w-9xl xl:mx-auto flex flex-col min-h-screen !overflow-x-hidden">
+                <div>
+                  {children}
+                  <ScrollToBottom />
+                </div>
                 <Footer />
               </div>
             </NavSidebar>
