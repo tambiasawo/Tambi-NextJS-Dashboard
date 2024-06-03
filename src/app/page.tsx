@@ -3,7 +3,7 @@ import Dashboard from "./components/Dashboard";
 
 export default async function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Dashboard />
     </main>
   );

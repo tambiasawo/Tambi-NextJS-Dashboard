@@ -21,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-mainBg text-textColor">
+      <body className="bg-mainBg text-textColor !overflow-x-clip">
         {user ? (
           <AuthContextProvider user={user}>
             <NavSidebar>
