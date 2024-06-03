@@ -58,21 +58,25 @@ const Toolbar = ({ action, title, formFields }: Props) => {
         />
       </div>
       {user.isAdmin && (
-        <div className="flex gap-4">
-          <button
-            className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
-            onClick={handleClickOpen}
-          >
-            Add New
-          </button>
-          <IconButton className="md:hidden p-1" onClick={handleClickOpen}>
-            <AddCircleOutline
-              fontSize="large"
-              sx={{ color: "#fff" }}
-              className="md:hidden hover:scale-125"
-            />
-          </IconButton>
-        </div>
+        <>
+          <div className="">
+            <button
+              className="bg-[#5d57c9] px-3 py-2 rounded-lg hidden md:block"
+              onClick={handleClickOpen}
+            >
+              Add New
+            </button>
+          </div>
+          <div className="md:hidden">
+            <IconButton className="p-1" onClick={handleClickOpen}>
+              <AddCircleOutline
+                fontSize="large"
+                sx={{ color: "#fff" }}
+                className="hover:scale-125"
+              />
+            </IconButton>
+          </div>
+        </>
       )}
       <Dialog
         open={open}
