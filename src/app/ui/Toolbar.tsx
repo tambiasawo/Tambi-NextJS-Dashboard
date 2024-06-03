@@ -66,7 +66,7 @@ const Toolbar = ({ action, title, formFields }: Props) => {
             Add New
           </button>
           <IconButton
-            className="block float-right md:hidden p-1"
+            className="float-right md:hidden p-1"
             onClick={handleClickOpen}
           >
             <AddCircleOutline
