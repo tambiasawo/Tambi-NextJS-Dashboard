@@ -1,7 +1,9 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@/app/ui/Card";
-import AnnouncementIcon from "@mui/icons-material/Announcement";
+import GroupIcon from "@mui/icons-material/Group";
+import PaidIcon from "@mui/icons-material/Paid";
+import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import DataTable from "../ui/Table";
 import { Box } from "@mui/material";
 import Chart from "../ui/Chart";
@@ -119,7 +121,7 @@ const Dashboard = async () => {
       <Grid container spacing={4}>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
-            icon={<AnnouncementIcon />}
+            icon={<ShoppingBag />}
             heading="Total Products"
             main={products.length}
             footer="+12% more than previous year"
@@ -127,7 +129,7 @@ const Dashboard = async () => {
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
           <Card
-            icon={<AnnouncementIcon />}
+            icon={<GroupIcon />}
             heading="Total Users"
             main={users.length}
             footer="+12% more than previous year"
@@ -135,7 +137,7 @@ const Dashboard = async () => {
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4}>
           <Card
-            icon={<AnnouncementIcon />}
+            icon={<PaidIcon />}
             heading="Total Transactions"
             main={transactions.length}
             footer="-10% less than previous year"
