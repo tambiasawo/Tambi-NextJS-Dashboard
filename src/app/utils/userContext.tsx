@@ -2,17 +2,6 @@
 import { Session } from "next-auth";
 import React from "react";
 
-type Props = {
-  user: {
-    user: {
-      name: string;
-      isAdmin: boolean;
-      email: string;
-      image: string;
-    };
-  };
-};
-
 const AuthContext = React.createContext<Session>({
   user: {
     user: {
